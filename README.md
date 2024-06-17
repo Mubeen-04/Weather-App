@@ -24,6 +24,11 @@ This is a simple weather application that allows users to search for the current
 - Open the .env file and paste your OpenWeatherMap API key there.
   API_KEY=your_api_key_here
 
+2. Install Dependencies
+
+- Ensure you have `Node.js` installed. Then, install the necessary packages:
+  `npm install dotenv`
+
 ## Usage
 1. Search for Weather
 
