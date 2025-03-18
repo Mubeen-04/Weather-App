@@ -1,17 +1,22 @@
 const express = require('express');
 const fetch = require('node-fetch');
-require('dotenv').config(); // Load environment variables if using .env file
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000; // Use port from environment variable or default to 3000
+const port = process.env.PORT || 3000;
+const apiKey = process.env.API_KEY;
 
-const apiKey = process.env.API_KEY; // Load API key from environment variable
+// Serve static files (frontend)
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.static('public')); // Assuming client-side assets are in a 'public' directory
-
-// Endpoint for fetching weather data
-app.get('/weather', async (req, res) => {
+// API route (now at `/`)
+app.get('/', async (req, res) => {
     const city = req.query.city;
+    if (!city) {
+        return res.sendFile(path.join(__dirname, "public", "index.html"));
+    }
+
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`;
 
     try {
