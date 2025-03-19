@@ -4,7 +4,7 @@ const weatherIcon = document.querySelector(".weather-icon");
 
 async function checkWeather(city) {
     try {
-        const response = await fetch(`/?city=${city}`);
+        const response = await fetch(`/weather?city=${encodeURIComponent(city)}`);
         if (!response.ok) {
             throw new Error('Weather data not found');
         }
